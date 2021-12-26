@@ -10,6 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <p>{{$store.state.more}}</p>
+  <!--actions 함수를 불러오고 싶을 땐 dispatch 사용.
+  commit은 mutations함수 불러올 때 사용.-->
+  <button @click="$store.dispatch('getData')">더 보기</button>
+
   <Container :instaData = "instaData" :step = "step" :image = "image" 
   @write = "content = $event"/>
   <button @click="more()">더보기</button>
@@ -39,10 +44,11 @@ export default {
       step: 0,
       image: '', // 게시할 이미지,
       content: '',  // 게시할 text
+      clickedFilter: '',
     }
   },
   mounted(){
-    this.a();
+    
   },
   methods: {
     publish(){
@@ -54,7 +60,9 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content,
-        filter: "perpetua"
+        filter: this.emitter.emit('boxClicked', (a) => {
+          this.clickedFilter = a;
+        })
       };
       this.instaData.unshift(myContent);
       this.step = 0;

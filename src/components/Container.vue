@@ -5,17 +5,17 @@
     </div>
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
-      <div class="upload-image"
+      <div :class="`${clickedFilter} upload-image`"
       :style="`background-image: url(${image})`"></div>
       <div class="filters">
-        <FilterBox v-for="a, i in filters.length" :key="i"
-        :image = "image" :class="filters[i]"></FilterBox>
+        <FilterBox :filter = "filter" :image = "image"
+        v-for="filter in filters" :key="filter"></FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
-      <div class="upload-image" :style="`background-image: url(${image})`"></div>
+      <div :class="`${clickedFilter} upload-image`" :style="`background-image: url(${image})`"></div>
       <div class="write">
         <textarea class="write-box" @input="$emit('write', $event.target.value)">write!</textarea>
       </div>
@@ -28,17 +28,25 @@ import Post from './Post.vue'
 import FilterBox from './FilterBox.vue'
 export default {
     name: "Container",
-    components: {
-        Post,
-        FilterBox,
-    },
     data(){
       return{
         filters: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
         "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
         "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
-
+        clickedFilter: '',
       }
+    },
+    components: {
+        Post,
+        FilterBox,
+    },
+    methods: {
+      
+    },
+    mounted(){
+      this.emitter.on('boxClick', (a)=>{
+        this.clickedFilter = a
+      })
     },
     props: {
         instaData: Array,
