@@ -6,7 +6,7 @@
     </div>
     <div  @dblclick="$store.commit('like')" class="post-body" :style="{backgroundImage: `url(${instaData.postImage})`}"></div>
     <div class="post-content">
-      <p>{{$store.state.like}} 개</p>
+      <p>좋아요 {{$store.state.like}} 개</p>
       <p><strong>{{instaData.filter}}</strong> {{instaData.content}}</p>
       <p class="date">{{instaData.date}}</p>
     </div>
@@ -17,7 +17,7 @@
 export default {
     data(){
         return{
-
+          finter: '',
         }
     },
     props: {

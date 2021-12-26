@@ -4,7 +4,8 @@
       <li @click="step = 0">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step++" v-if="step == 0 || step == 1">Next</li>
+      <li @click="step = 3" v-if="step == 0">프로필</li>
+      <li @click="step++" v-if=" step == 1">Next</li>
       <li @click="publish" v-if="step == 2">게시</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
@@ -36,7 +37,7 @@ export default {
       instaData: data,
       count: 0,
       contentWatch: false,
-      step: 3,
+      step: 0,
       image: '', // 게시할 이미지,
       content: '',  // 게시할 text
       clickedFilter: '',

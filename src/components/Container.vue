@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post v-for="a, i in instaData.length" :key="i" :instaData="instaData[i]"/>
+      <Post  v-for="a, i in instaData.length" :key="i" :instaData="instaData[i]"/>
     </div>
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
