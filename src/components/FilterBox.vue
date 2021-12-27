@@ -6,6 +6,10 @@
 <script>
 export default {
     name : 'filterbox',
+    props: {
+        image: String,
+        filter: String,
+    },
     methods: {
       fire(){
         this.emitter.emit('boxClick', this.filter);
@@ -15,10 +19,6 @@ export default {
       return{
 
       }
-    },
-    props: {
-        image: String,
-        filter: String,
     },
     mounted(){
 

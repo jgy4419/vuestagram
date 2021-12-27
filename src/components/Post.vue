@@ -4,10 +4,10 @@
       <div class="profile" :style="{backgroundImage: `url(${instaData.userImage})`}"></div>
       <span class="profile-name">{{instaData.name}}</span>
     </div>
-    <div  @dblclick="$store.commit('like')" class="post-body" :style="{backgroundImage: `url(${instaData.postImage})`}"></div>
+    <div  @dblclick="$store.commit('like')" :class= "`${filter} post-body`" :style="{backgroundImage: `url(${instaData.postImage})`}"></div>
     <div class="post-content">
       <p>좋아요 {{$store.state.like}} 개</p>
-      <p><strong>{{instaData.filter}}</strong> {{instaData.content}}</p>
+      <p><strong>{{instaData.name}}</strong> {{instaData.content}}</p>
       <p class="date">{{instaData.date}}</p>
     </div>
 </div>
@@ -18,6 +18,9 @@ export default {
     data(){
         return{
           finter: '',
+          filter: this.emitter.on('boxClick', (a) => {
+          this.clickedFilter = a;
+        }),
         }
     },
     props: {

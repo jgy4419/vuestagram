@@ -12,7 +12,7 @@
   </div>
 
   <Container :instaData = "instaData" :step = "step" :image = "image" 
-  @write = "content = $event"/>
+  @write = "content = $event" /> 
   <button @click="more()">더보기</button>
   <div class="footer">
     <ul class="footer-button-plus">
@@ -43,6 +43,11 @@ export default {
       clickedFilter: '',
     }
   },
+  mounted() {
+    this.emitter.on('boxClick', (a) => {
+          this.clickedFilter = a;
+    })
+  },
   computed:{
     name(){
       return this.$store.state.name
@@ -58,10 +63,10 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content,
-        filter: this.emitter.emit('boxClicked', (a) => {
-          this.clickedFilter = a;
-        })
+        filter: this.clickedFilter
       };
+      console.log(myContent.filter);
+      console.log(this.instaData);
       this.instaData.unshift(myContent);
       this.step = 0;
     },
